@@ -1,8 +1,9 @@
 
-class MyStack {
+export class MyStack {
     constructor() {
         this.items = [];
-        this.top = null;
+        this.top = -1;
+        this.maxSize = 5;
     }
 
     // get the size of the stack
@@ -12,6 +13,11 @@ class MyStack {
 
     // add a new item to the top of the stack
     push(newItem) {
+        //can't push if stack is full
+        if(this.size() === this.maxSize) {
+            throw "Stack Overflow"
+        }
+
         this.items.push(newItem);
         //set pointer
         this.top = newItem;
@@ -22,15 +28,12 @@ class MyStack {
         let currentSize = this.size();
 
         //nothing to return if the stack is empty
-        if (currentSize === 0) return null;
-
-        //set top to null if only 1 item left
-        //set it to previous item otherwise
-        if(currentSize === 1) {
-            this.top = null;
-        } else {
-            this.top = this.items(currentSize - 2);
+        if (currentSize === 0) {
+            throw "Stack Underflow"
         }
+
+        //point top to previous item
+        this.top = this.items(currentSize - 2);
 
         // remove the top item from the stack and return it
         let topItem = this.items.pop();
@@ -41,9 +44,16 @@ class MyStack {
     peek() {
 
         //nothing to return if the stack is empty
-        if (currentSize === 0) return null;
+        if (currentSize === 0) {
+            throw "Stack is empty"
+        }
 
         return this.top;
 
+    }
+
+    //log the items in the stack
+    logItems() {
+        console.log(this.items);
     }
 }
