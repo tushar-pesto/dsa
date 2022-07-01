@@ -7,7 +7,7 @@ export class MyStack {
     }
 
     // get the size of the stack
-    size() {
+    get size() {
         return this.items.length;
     }
 
