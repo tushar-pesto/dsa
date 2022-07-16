@@ -14,7 +14,7 @@ const double = (input) => {
 
 //better space
 const doubleInPlace = (input) => {
-    let n = input.length;
+    let n = input.length; 
     for(let i = 0; i<n; i++) {
         input[i] = input[i] * 2;
     }

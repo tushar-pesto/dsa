@@ -1,6 +1,5 @@
 //given alpha and beta, return true if they are anagrams
 
-//naive
 const checkAnagram = (alpha, beta) => {
     if(typeof alpha !== "string" || typeof beta !== "string") {
         throw "Invalid input";
@@ -27,7 +26,7 @@ const checkAnagram = (alpha, beta) => {
         }
     }
 
-    console.log({counter});
+    // console.log(counter);
     return true;
 
 }

@@ -30,22 +30,21 @@ export const fibonacci = (n) => {
     }
 }
 
-// fibonacci
-// given n, return the nth item in the sequence
-// 1-1-2-3-5-8-13-21
+// gcd
+// given m and n, return their greatest common divisor
 
-export const gcd = (m,n) => {
+export const gcd = (m, n) => {
     if (!Number.isInteger(m) || m <= 0) {
         throw "Invalid input"
     }
     if (!Number.isInteger(n) || n <= 0) {
         throw "Invalid input"
     }
-    let small = Math.min(m,n);
-    let big = Math.max(m,n);
+    let small = Math.min(m, n);
+    let big = Math.max(m, n);
     if (small == 0) {
         return big;
     } else {
-        return gcd(small, big%small)
+        return gcd(small, big % small)
     }
 }
