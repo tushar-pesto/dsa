@@ -20,3 +20,22 @@ const doubleInPlace = (input) => {
     }
     return input;
 }
+
+//time complexity
+//given a positive integer n, return the sum of all integers from 1 to n.
+
+//naive
+const calculateSum = (n) => {
+    let sum = 0;
+    for(let i=1; i<=n; i++) {
+        sum += i;
+    }
+
+    return sum;
+}
+
+//better time
+const calculateSumFormula = (n) => {
+    let sum = n*(n+1)/2;
+    return sum;
+}
