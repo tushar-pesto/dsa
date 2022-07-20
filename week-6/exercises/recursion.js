@@ -14,22 +14,6 @@ export const factorial = (n) => {
     }
 }
 
-// fibonacci
-// given n, return the nth item in the sequence
-// 1-1-2-3-5-8-13-21
-
-export const fibonacci = (n) => {
-    if (!Number.isInteger(n) || n <= 0) {
-        throw "Invalid input"
-    }
-    if (n == 1 || n == 2) {
-
-        return 1;
-    } else {
-        return fibonacci(n - 1) + fibonacci(n - 2);
-    }
-}
-
 // gcd
 // given m and n, return their greatest common divisor
 
@@ -46,5 +30,20 @@ export const gcd = (m, n) => {
         return big;
     } else {
         return gcd(small, big % small)
+    }
+}
+
+// fibonacci
+// given n, return the nth item in the sequence
+// 1-1-2-3-5-8-13-21
+
+export const fibonacci = (n) => {
+    if (!Number.isInteger(n) || n <= 0) {
+        throw "Invalid input"
+    }
+    if (n == 1 || n == 2) {
+        return 1;
+    } else {
+        return fibonacci(n - 1) + fibonacci(n - 2);
     }
 }
