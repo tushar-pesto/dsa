@@ -34,7 +34,7 @@ class MyQueue {
         return this.items.length === 0;
     }
 
-    log() {
+    logItems() {
         console.log(this.items);
     }
 }
