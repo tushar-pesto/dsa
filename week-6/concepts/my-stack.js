@@ -14,7 +14,7 @@ export class MyStack {
     // add a new item to the top of the stack
     push(newItem) {
         //can't push if stack is full
-        if(this.size() === this.maxSize) {
+        if(this.size === this.maxSize) {
             throw "Stack Overflow"
         }
 
@@ -25,7 +25,7 @@ export class MyStack {
 
     // remove an item from the top of the stack
     pop() {
-        let currentSize = this.size();
+        let currentSize = this.size;
 
         //nothing to return if the stack is empty
         if (currentSize === 0) {
