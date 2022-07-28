@@ -1,24 +1,24 @@
 /**
  * 
- * @param {*a number represented as SLL} l1 
- * @param {*a number represented as SLL} l2 
+ * @param {*a number represented as SLL} alpha 
+ * @param {*a number represented as SLL} beta 
  * output: their sum represented as SLL
  */
 
-let add = (l1, l2) => {
-    l1.log();
-    l2.log();
+let add = (alpha, beta) => {
+    alpha.log();
+    beta.log();
   
-    l1.reverse();
-    l2.reverse();
-    l1.log();
-    l2.log();
+    alpha.reverse();
+    beta.reverse();
+    alpha.log();
+    beta.log();
   
     let result = new SinglyLinkedList();
     let carry = 0;
   
-    let p1 = l1.head;
-    let p2 = l2.head;
+    let p1 = alpha.head;
+    let p2 = beta.head;
   
     console.log(p1);
     console.log(p2);
@@ -40,11 +40,10 @@ let add = (l1, l2) => {
       carry = Math.floor(sum / 10);
   
       console.log({ unit, carry });
-      result.push(unit);
+      result.unshift(unit);
     }
     if (carry > 0) {
-      result.push(carry);
+      result.unshift(carry);
     }
-    result.reverse()
     result.log()
   };
