@@ -30,7 +30,6 @@ class DoublyLinkedList {
         if (index < 0 || index >= this.size) return null;
 
         if (index <= this.size / 2) {
-
             let counter = 0;
             let current = this.head;
 
@@ -40,7 +39,7 @@ class DoublyLinkedList {
             }
             return current;
         } else {
-            let counter = this.size-1;
+            let counter = this.size - 1;
             let current = this.tail;
             while (counter !== index) {
                 current = current.prev;
@@ -68,7 +67,8 @@ class DoublyLinkedList {
         if (this.isEmpty) {
             this.head = newNode;
             this.tail = newNode;
-        } else { //for nonempty list
+        } else {
+            //for nonempty list
             this.tail.next = newNode;
             newNode.prev = this.tail;
             this.tail = newNode;
@@ -76,25 +76,21 @@ class DoublyLinkedList {
         this.size++;
         return this;
     }
-
     pop() {
         if (this.isEmpty) throw 'List Underflow';
-
         let toBeRemoved = this.tail;
         if (this.isSizeOne) {
             this.head = null;
             this.tail = null;
         } else {
             this.tail = toBeRemoved.prev;
-            this.tail.next = prev;
+            this.tail.next = null;
             toBeRemoved.prev = null;
         }
-
         this.size--;
-        return toBeRemoved;
+        // return toBeRemoved;
     }
 
-    // add before head
     unshift(value) {
         if (this.size == this.maxSize) throw 'List overflow';
 
@@ -112,28 +108,8 @@ class DoublyLinkedList {
         return this;
     }
 
-    // remove head
-    shift() {
-        if (this.isEmpty) throw 'List Underflow';
-
-        let toBeRemoved = this.head;
-
-        if (this.isSizeOne) {
-            this.head = null;
-            this.tail = null;
-        } else {
-        }
-        this.head = toBeRemoved.next;
-        this.head.prev = null;
-        toBeRemoved.next = null;
-        
-
-        this.size--;
-        return toBeRemoved;
-    }
-
     insert(index, value) {
-        if (this.size == this.maxSize) throw "List overflow"
+        if (this.size == this.maxSize) throw 'List overflow';
         if (!Number.isInteger(index)) throw 'Invalid index';
         if (index > this.size) throw 'Index too high';
         if (index < 0) throw 'Index too low';
@@ -157,9 +133,27 @@ class DoublyLinkedList {
 
         this.size++;
         return true;
-
     }
 
+    // remove head
+    shift() {
+        if (this.isEmpty) throw 'List Underflow';
+
+        let toBeRemoved = this.head;
+
+        if (this.isSizeOne) {
+            this.head = null;
+            this.tail = null;
+        } else {
+
+            this.head = toBeRemoved.next;
+            this.head.prev = null;
+            toBeRemoved.next = null;
+        }
+
+        this.size--;
+        return toBeRemoved;
+    }
     remove(index) {
         if (this.isEmpty) throw "List underflow"
         if (!Number.isInteger(index)) throw 'Invalid index';
@@ -190,7 +184,6 @@ class DoublyLinkedList {
     }
 
 
-
     log() {
         let aux = [];
         if (this.isEmpty) {
@@ -209,28 +202,24 @@ class DoublyLinkedList {
     }
 }
 
-export default DoublyLinkedList;
-
-// try {
-//     let list = new SinglyLinkedList();
-//     list.push(11);
-//     list.push(22);
-//     list.push(33);
-//     list.push(44);
-//     list.push(55);
-//     list.push(77);
-
-//     list.shift()
-//     list.shift()
-//     list.shift()
-//     list.shift()
-//     list.shift()
-
-//     console.log(list)
-
-
-
-//     list.log();
-// } catch (e) {
-//     console.warn(e)
-// }
+try {
+    let list = new DoublyLinkedList();
+    list.push(11);
+    list.push(22);
+    list.push(33);
+    list.push(44);
+    list.insert(1, 25)
+    list.insert(1, 25)
+    list.insert(1, 35)
+    list.insert(1, 45)
+    // list.remove(1)
+    // list.remove(1)
+    // list.remove(1)
+    // list.remove(1)
+    // list.shift()
+    // list.shift()
+    // list.shift()
+    list.log();
+} catch (e) {
+    console.warn(e);
+}
