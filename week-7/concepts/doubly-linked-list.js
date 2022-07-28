@@ -2,10 +2,11 @@ class Node {
     constructor(value) {
         this.value = value;
         this.next = null;
+        this.prev = null;
     }
 }
 
-class SinglyLinkedList {
+class DoublyLinkedList {
     constructor() {
         this.head = null;
         this.tail = null;
@@ -18,24 +19,35 @@ class SinglyLinkedList {
         return this.size === 0;
     }
 
+    get isSizeOne() {
+        return this.size === 1;
+    }
+
     getNode(index) {
         if (!Number.isInteger(index)) throw 'Invalid index';
         if (index >= this.size) throw 'Index too high';
         if (index < 0) throw 'Index too low';
         if (index < 0 || index >= this.size) return null;
 
-        //index starts from 0
-        let counter = 0;
-        let current = this.head;
+        if (index <= this.size / 2) {
 
-        //traverse till index is reached
-        while (counter !== index) {
-            console.log(counter, current);
-            current = current.next;
-            counter++;
+            let counter = 0;
+            let current = this.head;
+
+            while (counter !== index) {
+                current = current.next;
+                counter++;
+            }
+            return current;
+        } else {
+            let counter = this.size-1;
+            let current = this.tail;
+            while (counter !== index) {
+                current = current.prev;
+                counter--;
+            }
+            return current;
         }
-
-        return current;
     }
 
     setNode(index, value) {
@@ -52,11 +64,13 @@ class SinglyLinkedList {
 
         let newNode = new Node(value);
 
+        //for empty list
         if (this.isEmpty) {
             this.head = newNode;
             this.tail = newNode;
-        } else {
+        } else { //for nonempty list
             this.tail.next = newNode;
+            newNode.prev = this.tail;
             this.tail = newNode;
         }
         this.size++;
@@ -66,29 +80,18 @@ class SinglyLinkedList {
     pop() {
         if (this.isEmpty) throw 'List Underflow';
 
-
-        let current = this.head;
-        let newTail = current;
-
-        //keep traversing till 2nd last item
-        while (current.next) {
-            console.log('before', current);
-            newTail = current;
-            current = current.next;
-            console.log('after', current);
-        }
-
-        // set tail to the 2nd last item
-        this.tail = newTail;
-
-        //sever connection
-        this.tail.next = null;
-        this.size--;
-        if (this.isEmpty) {
+        let toBeRemoved = this.tail;
+        if (this.isSizeOne) {
             this.head = null;
             this.tail = null;
+        } else {
+            this.tail = toBeRemoved.prev;
+            this.tail.next = prev;
+            toBeRemoved.prev = null;
         }
-        return current;
+
+        this.size--;
+        return toBeRemoved;
     }
 
     // add before head
@@ -100,6 +103,7 @@ class SinglyLinkedList {
             this.head = newNode;
             this.tail = newNode;
         } else {
+            this.head.prev = newNode;
             newNode.next = this.head;
             this.head = newNode;
         }
@@ -112,14 +116,20 @@ class SinglyLinkedList {
     shift() {
         if (this.isEmpty) throw 'List Underflow';
 
-        let currentHead = this.head;
+        let toBeRemoved = this.head;
 
-        this.head = currentHead.next;
-        this.size--;
-        if (this.isEmpty) {
+        if (this.isSizeOne) {
+            this.head = null;
             this.tail = null;
+        } else {
         }
-        return currentHead;
+        this.head = toBeRemoved.next;
+        this.head.prev = null;
+        toBeRemoved.next = null;
+        
+
+        this.size--;
+        return toBeRemoved;
     }
 
     insert(index, value) {
@@ -129,23 +139,21 @@ class SinglyLinkedList {
         if (index < 0) throw 'Index too low';
 
         if (index == this.size) {
-            this.push(value);
-            return true;
+            return this.push(value);
         }
 
         if (index == 0) {
-            this.unshift(value);
-            return true;
+            return this.unshift(value);
         }
 
+        let newNode = new Node(value);
         let previous = this.getNode(index - 1);
         let oldNode = previous.next;
-        let newNode = new Node(value);
 
         newNode.next = oldNode;
+        oldNode.prev = newNode;
+        newNode.prev = previous;
         previous.next = newNode;
-
-        oldNode.next = null;
 
         this.size++;
         return true;
@@ -173,31 +181,12 @@ class SinglyLinkedList {
         let newNext = oldNode.next;
 
         previous.next = newNext;
+        newNext.prev = previous;
+        oldNode.next = null;
+        oldNode.prev = null;
 
         this.size--;
         return oldNode;
-
-    }
-
-    reverse() {
-        if (this.size <= 1) return this;
-
-        //swap head and tail
-        let tempNode = this.head;
-        this.head = this.tail;
-        this.tail = tempNode;
-
-        let nextNode;
-        let previousNode = null;
-
-        for (let i = 0; i < this.size; i++) {
-            nextNode = tempNode.next;
-            tempNode.next = previousNode;
-            previousNode = tempNode;
-            tempNode = nextNode;
-        }
-
-        return this;
     }
 
 
@@ -215,12 +204,12 @@ class SinglyLinkedList {
             aux.push(nextNode.value);
             current = nextNode;
         }
-        console.log(aux.join(' -> '));
+        console.log(aux.join(' <=> '));
         return;
     }
 }
 
-export default SinglyLinkedList;
+export default DoublyLinkedList;
 
 // try {
 //     let list = new SinglyLinkedList();
