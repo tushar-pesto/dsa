@@ -17,7 +17,7 @@ class BinarySearchTree {
 
 
     //iterative version of insert
-    /*
+
     insert(value) {
         let newNode = new Node(value);
         if (this.isEmpty) {
@@ -44,18 +44,18 @@ class BinarySearchTree {
             }
 
         }
-    }*/
-
-    insert(value) {
-        if (!Number.isInteger(value)) throw 'Invalid value';
-        let newNode = new Node(value);
-        if (this.isEmpty) {
-            this.root = newNode;
-            return;
-        } else {
-            this.#insertAt(newNode, this.root);
-        }
     }
+
+    // insert(value) {
+    //     if (!Number.isInteger(value)) throw 'Invalid value';
+    //     let newNode = new Node(value);
+    //     if (this.isEmpty) {
+    //         this.root = newNode;
+    //         return;
+    //     } else {
+    //         this.#insertAt(newNode, this.root);
+    //     }
+    // }
 
     #insertAt(newNode, currentNode) {
         if (newNode.value < currentNode.value) {
@@ -99,6 +99,7 @@ class BinarySearchTree {
 }
 
 
+
 try {
     let bst = new BinarySearchTree();
     bst.insert(20);
@@ -113,3 +114,6 @@ try {
 } catch (e) {
     console.warn(e);
 }
+
+
+export default BinarySearchTree;

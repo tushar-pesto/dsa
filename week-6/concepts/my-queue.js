@@ -11,6 +11,10 @@ class MyQueue {
         return this.items.length;
     }
 
+    get isEmpty() {
+        return this.items.length === 0;
+    }
+
     // add item to the back of the queue
     enqueue(item) {
         if (this.size === this.maxSize) {
