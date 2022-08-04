@@ -69,6 +69,30 @@ class MyGraph {
         return result;
     }
 
+    depthFirstIterative(start) {
+        let visited = new Set();
+        let list = this.adjacencyList;
+        let result = [];
+
+        let stack = [start];
+        visited.add(start);
+
+        while(stack.length) {
+            let vertex = stack.pop();
+            result.push(vertex)
+
+            list[vertex].forEach(neighbor => {
+                if(!visited.has(neighbor)){
+                    visited.add(neighbor);
+                    stack.push(neighbor)
+                }
+            })
+        }
+
+        return result;
+
+    }
+
     depthFirstSearch(start, key) {
         let visited = new Set();
         let list = this.adjacencyList;
